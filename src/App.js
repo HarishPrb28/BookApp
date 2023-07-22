@@ -1,23 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import Navbar from "./Components/Navbar";
+import BookList from "./Components/BookList";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 function App() {
+  const [books, setBooks] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  useEffect(() => {
+    const handleSearch = async (searchBook) => {
+      try {
+        const response = await axios.get(
+          `https://www.googleapis.com/books/v1/volumes?q=${searchBook}`
+        );
+
+        const searchResult = response.data.items;
+
+        setBooks(searchResult);
+      } catch (error) {
+        console.error("Error fetching search results:", error);
+      }
+    };
+    console.log(searchQuery, "showww");
+    handleSearch({ searchQuery });
+  }, [searchQuery]);
+
+  useEffect(() => {
+    const DataFetch = async () => {
+      try {
+        const resultsHarry = await axios.get(
+          "https://www.googleapis.com/books/v1/volumes?q=harry+potter"
+        );
+        const resultsSherlock = await axios.get(
+          "https://www.googleapis.com/books/v1/volumes?q=Sherlock+Holmes"
+        );
+        const AllData = resultsHarry.data.items.concat(
+          resultsSherlock.data.items
+        );
+        // console.log(AllData)
+        setBooks(() => AllData);
+      } catch (error) {
+        console.log(error, "error Fetching time.....");
+      }
+    };
+    DataFetch();
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar onSearch={setSearchQuery} />
+      {books.length > 0 && <BookList books={books} />}
     </div>
   );
 }
