@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/https;//HarishPrb28.github.io/BookApp/static/css/main.5f96f5d5.css",
+    "main.js": "/https;//HarishPrb28.github.io/BookApp/static/js/main.8327f241.js",
+    "index.html": "/https;//HarishPrb28.github.io/BookApp/index.html",
+    "main.5f96f5d5.css.map": "/https;//HarishPrb28.github.io/BookApp/static/css/main.5f96f5d5.css.map",
+    "main.8327f241.js.map": "/https;//HarishPrb28.github.io/BookApp/static/js/main.8327f241.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5f96f5d5.css",
+    "static/js/main.8327f241.js"
+  ]
+}
